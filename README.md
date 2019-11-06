@@ -1,11 +1,14 @@
-# How ghello works?
- 
-Ghello handle:
- 
- 1. GET http://0.0.0.0:5000/ request and then prints GET_MSG environment variable value
- 1. POST http://0.0.0.0:5000/ request and then prints POST_MSG environment variable value 
+# ghello endpoints
 
+ghello is configured by env variables.
 
+GET_ENDPOINT defines GET request endpoint name (without leading '/')
+POST_ENDPOINT defines GET request endpoint name (without leading '/')
+
+Endpoints secured with JWT are available at /jwt/${GET_ENDPOINT} and /jwt/${POST_ENDPOINT}
+
+GET endpoints will return text message defines in GET_MSG
+POST endpoints will return text message defines in POST_MSG
 
 # Build Docker image
 
@@ -13,7 +16,4 @@ Ghello handle:
     
 # Run container
 
-    docker run -it -p 5000:5000 -e GET_MSG=111 -e POST_MSG=222 ghello:v1
-    or
-    docker run -d -p 5000:5000 -e GET_MSG=111 -e POST_MSG=222 ghello:v1
-    
+    docker run -it -p 5000:5000 -e GET_ENDPOINT=/aa -e GET_MSG=111 ghello:v1
